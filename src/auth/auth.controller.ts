@@ -14,10 +14,9 @@ export class AuthController {
         console.log(data.username,data.password)
         return this.userService.findByUsernamePassword(data.username,data.password).then((result)=>{
             console.log(result)
-            this.jwt.validate({id:result[0].id,username:result[0].username}).then((j)=>{
-                console.log("J",j)
+            return this.jwt.validate({id:result[0].id,username:result[0].username}).then((j)=>{
+                return result
             })
-            return result
         })
     }
 }

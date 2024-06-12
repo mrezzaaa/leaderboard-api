@@ -34,8 +34,8 @@ export class ScoreService {
     return this.scoreRepository.findOneBy({ id });
   }
 
-  insertOne(id:number,score:number) {
-    return this.scoreRepository.insert({id,score})
+  insertOne(user_id:number,score:number) {
+    return this.scoreRepository.insert({user_id,score})
   }
 
   async remove(id: number): Promise<void> {

@@ -17,6 +17,13 @@ export class ScoreController {
         return result
     }
 
+
+    @Post('submit')
+    async addScore(@Body() data:any){
+        return this.scoreService.insertOne(data.id,data.score)
+    }
+
+
     @Get("leaderboard")
     async getTop10(){
         const result = await this.scoreService.findTop10()
