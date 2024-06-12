@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: icewalker
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: leaderboard_api
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Mount SQL scripts for initialization
+
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: icewalker
+      DATABASE_PASSWORD: 
+      DATABASE_NAME: leaderboard_api
